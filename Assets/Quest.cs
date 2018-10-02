@@ -11,7 +11,7 @@ public class Quest {
 	public QuestUpdateEvent updateEvent { get; private set;}
 	private bool m_completed;
 	private Title m_title;
-	private string m_description = string.Empty;
+	public string m_description { get; private set;}
 	private int m_currentProgress;
 	private int m_goal {get;set;}
 
@@ -42,7 +42,7 @@ public class Quest {
 	private void CheckProgress() {
 		if (m_currentProgress == m_goal) {
 			m_completed = true;
-			Debug.Log (m_description + " completed!");
+			questText.color = Color.green;
 		}
 	}
 
@@ -79,7 +79,7 @@ public class Quest {
 			updateEvent = QuestUpdateEvent.LEVEL_COMPLETED;
 			break;
 		case Title.COLLECT_1_GOLD_MEDAL:
-			m_description = "Collect a gold medal";
+			m_description = "Collect 1 gold medal";
 			m_goal = 1;
 			m_currentProgress = 0;
 			updateEvent = QuestUpdateEvent.GOLD_MEDAL_COLLECTED;

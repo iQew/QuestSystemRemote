@@ -32,9 +32,10 @@ public class QuestManager : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			int randomIndex = UnityEngine.Random.Range (0, randomIndices.Count);
 			m_activeQuests.Add (m_questPool[randomIndices[randomIndex]]);
-			questLog.AddQuestToLog (m_activeQuests [i], i);
+			questLog.AddQuestToLog (m_activeQuests [i]);
 			randomIndices.RemoveAt (randomIndex);
 		}
+		questLog.SortQuestLog ();
 	}
 
 	public void SendQuestUpdateEvent(QuestUpdateEvent questUpdateEvent) {

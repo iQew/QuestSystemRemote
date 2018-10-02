@@ -22,12 +22,12 @@ public class QuestLog : MonoBehaviour {
 		m_questTexts.Add (quest5);
 	}
 
-	public void AddQuestToLog(Quest quest, int questPosition) {
+	public void AddQuestToLog(Quest quest) {
 		if (m_quests == null) {
 			Debug.Log ("Quests null!");
 		}
 		if (!m_quests.Contains (quest) && m_quests.Count < 5) {			
-			quest.questText = m_questTexts [questPosition];
+			
 			quest.ShowProgress ();
 			m_quests.Add (quest);
 
@@ -37,6 +37,17 @@ public class QuestLog : MonoBehaviour {
 			} else {
 				Debug.LogError ("Quest log cannot hold more than 5 quests!");
 			}
+		}
+	}
+
+	public void SortQuestLog() {
+		m_quests.Sort (delegate(Quest x, Quest y) {
+			return x.m_description.CompareTo(y.m_description);
+		});
+		int questsCount = m_quests.Count;
+		for (int i = 0; i < questsCount; i++) {
+			m_quests [i].questText = m_questTexts [i];
+			m_quests [i].ShowProgress ();
 		}
 	}
 }
